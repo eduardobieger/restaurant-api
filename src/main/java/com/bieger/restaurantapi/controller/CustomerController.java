@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bieger.restaurantapi.model.Customer;
-import com.bieger.restaurantapi.service.CustomerService;
+import com.bieger.restaurantapi.service.impl.CustomerServiceImpl;
 
 @RestController
 @RequestMapping("api/v1/customers")
 public class CustomerController {
 
-	private final CustomerService customerService;
+	private final CustomerServiceImpl customerService;
 
-	public CustomerController(CustomerService customerService) {
+	public CustomerController(CustomerServiceImpl customerService) {
 		super();
 		this.customerService = customerService;
 	}

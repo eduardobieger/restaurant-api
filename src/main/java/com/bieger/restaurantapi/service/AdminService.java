@@ -1,17 +1,16 @@
 package com.bieger.restaurantapi.service;
 
-import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.List;
 
-import com.bieger.restaurantapi.repository.AdminRepository;
+import com.bieger.restaurantapi.model.Admin;
 
-@Service
-public class AdminService {
+public interface AdminService {
 
-	private final AdminRepository adminRepository;
-
-	public AdminService(AdminRepository adminRepository) {
-		super();
-		this.adminRepository = adminRepository;
-	}
+	public HashMap<Integer, Admin> findAll();
+	public Admin findById(Integer adminId);
+	public Admin save(Admin admin);
+	public Admin update(Integer adminId, Admin admin);
+	public void deleteById(Integer adminId);
 	
 }
