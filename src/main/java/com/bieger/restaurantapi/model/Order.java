@@ -1,6 +1,7 @@
 package com.bieger.restaurantapi.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
@@ -33,32 +34,36 @@ public class Order {
 	
 	private Integer userId;
 	
+	private List<Integer> itemsId;
+	
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private User orderUser;
 	
-//	@ManyToMany
-//	@JoinTable(
-//			name = "order_items",
-//			joinColumns = @JoinColumn(name = "order_id"),
-//			inverseJoinColumns = @JoinColumn(name = "item_id")
-//	)
-//	@JsonIgnore
-//	private List<Item> orderItems;
+	@Column(name = "order_items", nullable = false)
+	@ManyToMany
+	@JoinTable(
+			name = "order_items",
+			joinColumns = @JoinColumn(name = "order_id"),
+			inverseJoinColumns = @JoinColumn(name = "item_id")
+	)
+	@JsonIgnore
+	private List<Item> orderItems;
 	
 	public Order() {
 		
 	}
 
-	public Order(Integer id, BigDecimal totalPrice, Integer userId, User orderUser,
+	public Order(Integer id, BigDecimal totalPrice, Integer userId, List<Integer> itemsId, User orderUser,
 			List<Item> orderItems) {
 		this.id = id;
 		this.totalPrice = totalPrice;
 		this.userId = userId;
+		this.itemsId = itemsId;
 		this.orderUser = orderUser;
-//		this.orderItems = orderItems;
+		this.orderItems = orderItems;
 	}
 
 	public Integer getId() {
@@ -85,6 +90,14 @@ public class Order {
 		this.userId = userId;
 	}
 
+	public List<Integer> getItemsId() {
+		return itemsId;
+	}
+
+	public void setItemsId(List<Integer> itemsId) {
+		this.itemsId = itemsId;
+	}
+
 	public User getOrderUser() {
 		return orderUser;
 	}
@@ -93,12 +106,12 @@ public class Order {
 		this.orderUser = orderUser;
 	}
 
-//	public List<Item> getOrderItems() {
-//		return orderItems;
-//	}
-//
-//	public void setOrderItems(List<Item> orderItems) {
-//		this.orderItems = orderItems;
-//	}
+	public List<Item> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<Item> orderItems) {
+		this.orderItems = orderItems;
+	}
 	
 }

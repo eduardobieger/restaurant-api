@@ -1,10 +1,12 @@
 package com.bieger.restaurantapi.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bieger.restaurantapi.model.Item;
 import com.bieger.restaurantapi.model.Order;
 import com.bieger.restaurantapi.repository.OrderRepository;
 import com.bieger.restaurantapi.service.OrderService;
@@ -13,15 +15,11 @@ import com.bieger.restaurantapi.service.OrderService;
 public class OrderServiceImpl implements OrderService {
 	
 	private final OrderRepository orderRepository;
-	
 	private final ItemServiceImpl itemService;
-	
-	private final UserServiceImpl userService;
 
-	public OrderServiceImpl(OrderRepository orderRepository, ItemServiceImpl itemService, UserServiceImpl userService) {
+	public OrderServiceImpl(OrderRepository orderRepository, ItemServiceImpl itemService) {
 		this.orderRepository = orderRepository;
 		this.itemService = itemService;
-		this.userService = userService;
 	}
 	
 	@Override
@@ -37,9 +35,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Order save(Order order) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Item> itemsList = new ArrayList<>();
+		for(Integer i = 1; i < order.getItemsId().size(); i++) {			
+			itemsList.add(itemService.findById(i));
+		}
+		order.setOrderItems(itemsList);
+		return orderRepository.save(order);
 	}
 
 	@Override

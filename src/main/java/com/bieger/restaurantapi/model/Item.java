@@ -3,14 +3,14 @@ package com.bieger.restaurantapi.model;
 import java.math.BigDecimal;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,19 +30,20 @@ public class Item {
 	@Column(name = "description")
 	private String description;
 	
-//	@OneToMany(mappedBy = "items", cascade = CascadeType.ALL)
-//	private List<Order> orders;
+	@ManyToMany(mappedBy = "orderItems")
+	@JsonIgnore
+	private List<Order> orders;
 	
 	public Item() {
 		
 	}
 
-	public Item(Integer id, String title, BigDecimal price, String description) {
+	public Item(Integer id, String title, BigDecimal price, String description, List<Order> orders) {
 		this.id = id;
 		this.title = title;
 		this.price = price;
 		this.description = description;
-//		this.orders = orders;
+		this.orders = orders;
 	}
 
 	public Integer getId() {
@@ -77,12 +78,12 @@ public class Item {
 		this.description = description;
 	}
 	
-//	public List<Order> getOrders() {
-//		return orders;
-//	}
-//	
-//	public void setOrders(List<Order> orders) {
-//		this.orders = orders;
-//	}
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 	
 }
