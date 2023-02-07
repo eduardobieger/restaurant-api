@@ -1,6 +1,5 @@
 package com.bieger.restaurantapi.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -39,15 +38,15 @@ public class User {
 	@Column(name = "email")
 	private String email;
 	
-//	@OneToMany(mappedBy = "orderUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	private List<Order> orders;
+	@OneToMany(mappedBy = "orderUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Order> orders;
 	
 	public User() {
 		
 	}
 
 	public User(Integer id, String username, String password, String firstName, String lastName, String phoneNumber,
-			String email) {
+			String email, List<Order> orders) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -55,7 +54,7 @@ public class User {
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-//		this.orders = orders;
+		this.orders = orders;
 	}
 
 	public Integer getId() {
@@ -114,12 +113,12 @@ public class User {
 		this.email = email;
 	}
 	
-//	public List<Order> getOrders() {
-//		return orders;
-//	}
-//	
-//	public void setOrders(List<Order> orders) {
-//		this.orders = orders;
-//	}
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 	
 }

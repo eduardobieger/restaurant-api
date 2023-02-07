@@ -1,12 +1,23 @@
 package com.bieger.restaurantapi.model;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,13 +31,34 @@ public class Order {
 	@Column(name = "total_price", nullable = false)
 	private BigDecimal totalPrice;
 	
+	private Integer userId;
+	
+	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private User orderUser;
+	
+//	@ManyToMany
+//	@JoinTable(
+//			name = "order_items",
+//			joinColumns = @JoinColumn(name = "order_id"),
+//			inverseJoinColumns = @JoinColumn(name = "item_id")
+//	)
+//	@JsonIgnore
+//	private List<Item> orderItems;
+	
 	public Order() {
 		
 	}
 
-	public Order(Integer id, BigDecimal totalPrice) {
+	public Order(Integer id, BigDecimal totalPrice, Integer userId, User orderUser,
+			List<Item> orderItems) {
 		this.id = id;
 		this.totalPrice = totalPrice;
+		this.userId = userId;
+		this.orderUser = orderUser;
+//		this.orderItems = orderItems;
 	}
 
 	public Integer getId() {
@@ -44,5 +76,29 @@ public class Order {
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public User getOrderUser() {
+		return orderUser;
+	}
+
+	public void setOrderUser(User orderUser) {
+		this.orderUser = orderUser;
+	}
+
+//	public List<Item> getOrderItems() {
+//		return orderItems;
+//	}
+//
+//	public void setOrderItems(List<Item> orderItems) {
+//		this.orderItems = orderItems;
+//	}
 	
 }

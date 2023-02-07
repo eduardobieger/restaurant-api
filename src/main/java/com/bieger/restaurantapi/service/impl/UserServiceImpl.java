@@ -1,9 +1,6 @@
 package com.bieger.restaurantapi.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 
 import com.bieger.restaurantapi.model.User;
