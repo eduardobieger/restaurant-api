@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional(readOnly = false)
 	public Order save(Order order) {
 		List<Item> itemsList = new ArrayList<>();
-		for(Integer i = 1; i < order.getItemsId().size(); i++) {			
+		for(Integer i = 1; i <= order.getItemsId().size(); i++) {			
 			itemsList.add(itemService.findById(i));
 		}
 		order.setOrderItems(itemsList);

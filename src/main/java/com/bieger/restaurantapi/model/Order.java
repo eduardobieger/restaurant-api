@@ -1,7 +1,6 @@
 package com.bieger.restaurantapi.model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
@@ -32,8 +31,10 @@ public class Order {
 	@Column(name = "total_price", nullable = false)
 	private BigDecimal totalPrice;
 	
+	@Column(name = "user_id", nullable = false)
 	private Integer userId;
 	
+	@Column(name = "items_id", nullable = false)
 	private List<Integer> itemsId;
 	
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
