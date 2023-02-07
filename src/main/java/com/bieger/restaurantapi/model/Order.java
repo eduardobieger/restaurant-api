@@ -29,12 +29,12 @@ public class Order {
 	private Integer id;
 	
 	@Column(name = "total_price", nullable = false)
-	private BigDecimal totalPrice;
+	private BigDecimal totalPrice = new BigDecimal("0");
 	
-	@Column(name = "user_id", nullable = false)
+//	@Column(name = "user_id", nullable = false)
 	private Integer userId;
 	
-	@Column(name = "items_id", nullable = false)
+//	@Column(name = "items_id", nullable = false)
 	private List<Integer> itemsId;
 	
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)

@@ -1,5 +1,6 @@
 package com.bieger.restaurantapi.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,13 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional(readOnly = false)
 	public Order save(Order order) {
 		List<Item> itemsList = new ArrayList<>();
+		BigDecimal totalPrice = new BigDecimal("0");
 		for(Integer i = 1; i <= order.getItemsId().size(); i++) {			
 			itemsList.add(itemService.findById(i));
+			totalPrice = totalPrice.add(itemService.findById(i).getPrice());
 		}
 		order.setOrderItems(itemsList);
+		order.setTotalPrice(totalPrice);
 		return orderRepository.save(order);
 	}
 
