@@ -50,15 +50,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order update(Order order) {
-		// TODO Auto-generated method stub
+	public Order update(Integer orderId, Order order) {
+		Order updatedOrder = findById(orderId);
+		updatedOrder.setUserId(order.getUserId());
+		updatedOrder.setItemsId(order.getItemsId());
 		return null;
 	}
 
 	@Override
 	public void deleteById(Integer orderId) {
-		// TODO Auto-generated method stub
-		
+		orderRepository.deleteById(orderId);
 	}
 
 }

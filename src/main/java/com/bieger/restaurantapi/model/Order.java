@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,10 +32,10 @@ public class Order {
 	@Column(name = "total_price", nullable = false)
 	private BigDecimal totalPrice = new BigDecimal("0");
 	
-//	@Column(name = "user_id", nullable = false)
+	@Nonnull
 	private Integer userId;
 	
-//	@Column(name = "items_id", nullable = false)
+	@Column(name = "items_id", nullable = false)
 	private List<Integer> itemsId;
 	
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
