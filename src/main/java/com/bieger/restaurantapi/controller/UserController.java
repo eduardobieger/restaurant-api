@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bieger.restaurantapi.model.User;
+import com.bieger.restaurantapi.model.UserModel;
 import com.bieger.restaurantapi.service.impl.UserServiceImpl;
 
 @RestController
@@ -26,22 +26,22 @@ public class UserController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
+	public ResponseEntity<List<UserModel>> findAll() {
 		return ResponseEntity.ok().body(userService.findAll());
 	}
 	
 	@GetMapping("{userId}")
-	public ResponseEntity<User> findById(@PathVariable Integer userId) {
+	public ResponseEntity<UserModel> findById(@PathVariable Integer userId) {
 		return ResponseEntity.ok().body(userService.findById(userId));
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> save(@RequestBody User user) {
+	public ResponseEntity<UserModel> save(@RequestBody UserModel user) {
 		return ResponseEntity.ok().body(userService.save(user));
 	}
 	
 	@PutMapping("{userId}")
-	public ResponseEntity<User> update(@PathVariable Integer userId, @RequestBody User user) {
+	public ResponseEntity<UserModel> update(@PathVariable Integer userId, @RequestBody UserModel user) {
 		return ResponseEntity.ok().body(userService.update(userId, user));
 	}
 	

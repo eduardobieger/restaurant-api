@@ -13,23 +13,21 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "user_tb")
+public class UserModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name = "username", nullable = false)
+
 	private String username;
-	
-	@Column(name = "password", nullable = false)
+
 	private String password;
 	
-	@Column(name = "first_name", nullable = false)
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@Column(name = "last_name", nullable = false)
+	@Column(name = "last_name")
 	private String lastName;
 	
 	@Column(name = "phone_number")
@@ -39,14 +37,14 @@ public class User {
 	private String email;
 	
 	@OneToMany(mappedBy = "orderUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Order> orders;
+	private List<OrderModel> orders;
 	
-	public User() {
+	public UserModel() {
 		
 	}
 
-	public User(Integer id, String username, String password, String firstName, String lastName, String phoneNumber,
-			String email, List<Order> orders) {
+	public UserModel(Integer id, String username, String password, String firstName, String lastName, String phoneNumber,
+					 String email, List<OrderModel> orders) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -113,11 +111,11 @@ public class User {
 		this.email = email;
 	}
 	
-	public List<Order> getOrders() {
+	public List<OrderModel> getOrders() {
 		return orders;
 	}
 	
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<OrderModel> orders) {
 		this.orders = orders;
 	}
 	

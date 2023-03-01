@@ -3,7 +3,7 @@ package com.bieger.restaurantapi.service.impl;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-import com.bieger.restaurantapi.model.User;
+import com.bieger.restaurantapi.model.UserModel;
 import com.bieger.restaurantapi.repository.UserRepository;
 import com.bieger.restaurantapi.service.UserService;
 
@@ -20,26 +20,26 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<User> findAll() {
+	public List<UserModel> findAll() {
 		return userRepository.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public User findById(Integer userId) {
+	public UserModel findById(Integer userId) {
 		return userRepository.findById(userId).get();
 	}
 	
 	@Override
 	@Transactional(readOnly = false)
-	public User save(User user) {
+	public UserModel save(UserModel user) {
 		return userRepository.save(user);
 	}
 	
 	@Override
 	@Transactional(readOnly = false)
-	public User update(Integer userId, User user) {
-		User userUpdated = findById(userId);
+	public UserModel update(Integer userId, UserModel user) {
+		UserModel userUpdated = findById(userId);
 		userUpdated.setFirstName(user.getFirstName());
 		userUpdated.setLastName(user.getLastName());
 		userUpdated.setEmail(user.getEmail());
