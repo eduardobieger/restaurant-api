@@ -22,44 +22,43 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "orders")
-public class Order {
+@Table(name = "order_tb")
+public class OrderModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "total_price", nullable = false)
+	@Column(name = "total_price")
 	private BigDecimal totalPrice = new BigDecimal("0");
-	
-	@Nonnull
+
 	private Integer userId;
 	
-	@Column(name = "items_id", nullable = false)
+	@Column(name = "items_id")
 	private List<Integer> itemsId;
 	
-	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = UserModel.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
-	private User orderUser;
+	private UserModel orderUser;
 	
-	@Column(name = "order_items", nullable = false)
+
 	@ManyToMany
 	@JoinTable(
-			name = "order_items",
+			name = "order_items_tb",
 			joinColumns = @JoinColumn(name = "order_id"),
 			inverseJoinColumns = @JoinColumn(name = "item_id")
 	)
 	@JsonIgnore
-	private List<Item> orderItems;
+	private List<ItemModel> orderItems;
 	
-	public Order() {
+	public OrderModel() {
 		
 	}
 
-	public Order(Integer id, BigDecimal totalPrice, Integer userId, List<Integer> itemsId, User orderUser,
-			List<Item> orderItems) {
+	public OrderModel(Integer id, BigDecimal totalPrice, Integer userId, List<Integer> itemsId, UserModel orderUser,
+					  List<ItemModel> orderItems) {
 		this.id = id;
 		this.totalPrice = totalPrice;
 		this.userId = userId;
@@ -100,19 +99,19 @@ public class Order {
 		this.itemsId = itemsId;
 	}
 
-	public User getOrderUser() {
+	public UserModel getOrderUser() {
 		return orderUser;
 	}
 
-	public void setOrderUser(User orderUser) {
+	public void setOrderUser(UserModel orderUser) {
 		this.orderUser = orderUser;
 	}
 
-	public List<Item> getOrderItems() {
+	public List<ItemModel> getOrderItems() {
 		return orderItems;
 	}
 
-	public void setOrderItems(List<Item> orderItems) {
+	public void setOrderItems(List<ItemModel> orderItems) {
 		this.orderItems = orderItems;
 	}
 	

@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bieger.restaurantapi.model.Item;
-import com.bieger.restaurantapi.model.Order;
+import com.bieger.restaurantapi.model.ItemModel;
+import com.bieger.restaurantapi.model.OrderModel;
 import com.bieger.restaurantapi.repository.OrderRepository;
 import com.bieger.restaurantapi.service.OrderService;
 
@@ -25,20 +25,20 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Order> findAll() {
+	public List<OrderModel> findAll() {
 		return orderRepository.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Order findById(Integer orderId) {
+	public OrderModel findById(Integer orderId) {
 		return orderRepository.findById(orderId).get();
 	}
 
 	@Override
 	@Transactional(readOnly = false)
-	public Order save(Order order) {
-		List<Item> itemsList = new ArrayList<>();
+	public OrderModel save(OrderModel order) {
+		List<ItemModel> itemsList = new ArrayList<>();
 		BigDecimal totalPrice = new BigDecimal("0");
 		for(Integer i = 1; i <= order.getItemsId().size(); i++) {			
 			itemsList.add(itemService.findById(i));
@@ -50,8 +50,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order update(Integer orderId, Order order) {
-		Order updatedOrder = findById(orderId);
+	public OrderModel update(Integer orderId, OrderModel order) {
+		OrderModel updatedOrder = findById(orderId);
 		updatedOrder.setUserId(order.getUserId());
 		updatedOrder.setItemsId(order.getItemsId());
 		return null;

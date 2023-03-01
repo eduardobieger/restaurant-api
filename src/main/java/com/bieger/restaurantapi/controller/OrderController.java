@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bieger.restaurantapi.model.Order;
+import com.bieger.restaurantapi.model.OrderModel;
 import com.bieger.restaurantapi.service.impl.OrderServiceImpl;
 
 @RestController
@@ -23,12 +23,12 @@ public class OrderController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Order>> findAll() {
+	public ResponseEntity<List<OrderModel>> findAll() {
 		return ResponseEntity.ok(orderService.findAll());
 	}
 	
 	@PostMapping
-	public ResponseEntity<Order> save(@RequestBody Order order) {
+	public ResponseEntity<OrderModel> save(@RequestBody OrderModel order) {
 		return ResponseEntity.ok(orderService.save(order));
 	}
 }
