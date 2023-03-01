@@ -14,8 +14,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "item")
-public class Item {
+@Table(name = "item_tb")
+public class ItemModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +32,13 @@ public class Item {
 	
 	@ManyToMany(mappedBy = "orderItems")
 	@JsonIgnore
-	private List<Order> orders;
+	private List<OrderModel> orders;
 	
-	public Item() {
+	public ItemModel() {
 		
 	}
 
-	public Item(Integer id, String title, BigDecimal price, String description, List<Order> orders) {
+	public ItemModel(Integer id, String title, BigDecimal price, String description, List<OrderModel> orders) {
 		this.id = id;
 		this.title = title;
 		this.price = price;
@@ -78,11 +78,11 @@ public class Item {
 		this.description = description;
 	}
 	
-	public List<Order> getOrders() {
+	public List<OrderModel> getOrders() {
 		return orders;
 	}
 	
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<OrderModel> orders) {
 		this.orders = orders;
 	}
 	

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bieger.restaurantapi.model.Item;
+import com.bieger.restaurantapi.model.ItemModel;
 import com.bieger.restaurantapi.service.impl.ItemServiceImpl;
 
 @RestController
@@ -23,12 +23,12 @@ public class ItemController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Item>> findAll() {
+	public ResponseEntity<List<ItemModel>> findAll() {
 		return ResponseEntity.ok(itemService.findAll());
 	}
 	
 	@PostMapping
-	public ResponseEntity<Item> save(@RequestBody Item item) {
+	public ResponseEntity<ItemModel> save(@RequestBody ItemModel item) {
 		return ResponseEntity.ok(itemService.save(item));
 	}
 	

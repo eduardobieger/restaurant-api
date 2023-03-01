@@ -3,9 +3,9 @@ package com.bieger.restaurantapi.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bieger.restaurantapi.model.Item;
+import com.bieger.restaurantapi.model.ItemModel;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Integer> {
+public interface ItemRepository extends JpaRepository<ItemModel, Integer> {
 
 }
